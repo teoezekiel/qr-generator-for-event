@@ -11,19 +11,19 @@
     <button id="download">Download QR Code</button>
     <script>
         function generateQRCode(productID, price) {
-            const productData = {
-                id: productID,
-                price: price
-            };
-            const productDataString = JSON.stringify(productData);
+            // Create a URL containing the product ID and price as query parameters
+            const url = `https://yourwebsite.com/product.html?id=${productID}&price=${encodeURIComponent(price)}`;
+            
+            // Generate the QR code
             new QRCode(document.getElementById("qrcode"), {
-                text: productDataString,
+                text: url,
                 width: 128,
                 height: 128,
             });
         }
 
-        const productID = "12345AcD";
+        // Example usage
+        const productID = "12345";
         const price = "$29.99";
         generateQRCode(productID, price);
 
