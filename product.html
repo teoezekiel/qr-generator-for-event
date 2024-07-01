@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-info div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Information</h1>
+    <div class="product-info">
+        <div id="product-id"></div>
+        <div id="product-price"></div>
+    </div>
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const regex = /([^&=]+)=([^&]*)/g;
+            let match;
+            while (match = regex.exec(queryString)) {
+                params[decodeURIComponent(match[1])] = decodeURIComponent(match[2]);
+            }
+            return params;
+        }
+
+        // Get the product information from the URL parameters
+        const params = getQueryParams();
+        const productID = params['id'];
+        const price = params['price'];
+
+        // Display the product information
+        document.getElementById('product-id').innerText = `Product ID: ${productID}`;
+        document.getElementById('product-price').innerText = `Price: ${price}`;
+    </script>
+</body>
+</html>

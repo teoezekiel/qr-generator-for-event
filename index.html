@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id="qrcode"></div>
+    <button id="download">Download QR Code</button>
+    <script>
+        function generateQRCode(productID, price) {
+            const productData = {
+                id: productID,
+                price: price
+            };
+            const productDataString = JSON.stringify(productData);
+            new QRCode(document.getElementById("qrcode"), {
+                text: productDataString,
+                width: 128,
+                height: 128,
+            });
+        }
+
+        const productID = "12345AcD";
+        const price = "$29.99";
+        generateQRCode(productID, price);
+
+        document.getElementById("download").addEventListener("click", function() {
+            const canvas = document.querySelector("#qrcode canvas");
+            const dataURL = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = "qrcode.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>
